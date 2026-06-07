@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T'as vu le prix ? 🦝✨ – Pépetise tes comptes avec Pépette</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --beige: #FFEEE0;
+    --orange: #FF751F;
+    --rose: #F6B6BC;
+    --gris: #737373;
+    --beige-dark: #f5dfc8;
+    --orange-dark: #e05e00;
+    --text-dark: #2D1A0E;
+    --text-body: #4A3728;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--beige);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(255,238,224,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 2px solid var(--rose);
+    padding: 12px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Fredoka One', cursive; font-size: 1.35rem;
+    color: var(--orange); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 22px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-body);
+    font-weight: 700; font-size: 0.88rem; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white !important;
+    padding: 10px 22px; border-radius: 50px;
+    font-weight: 900 !important; font-size: 0.88rem !important;
+    transition: transform 0.2s, background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; transform: scale(1.04); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; padding: 110px 32px 70px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, var(--rose) 0%, transparent 70%);
+    opacity: 0.35; border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -60px; left: -60px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, #FFD8B0 0%, transparent 70%);
+    opacity: 0.45; border-radius: 50%;
+  }
+  .hero-inner {
+    max-width: 1100px; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center; position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--rose); color: var(--text-dark);
+    font-size: 0.82rem; font-weight: 800;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 20px;
+    animation: bounceIn 0.6s ease;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    line-height: 1.15; color: var(--text-dark); margin-bottom: 20px;
+    animation: slideUp 0.7s ease 0.1s both;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--text-body);
+    line-height: 1.75; margin-bottom: 36px; font-weight: 600;
+    animation: slideUp 0.7s ease 0.2s both;
+  }
+  .hero-sub strong { color: var(--orange); }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; animation: slideUp 0.7s ease 0.3s both; }
+
+  .btn-primary {
+    background: var(--orange); color: white;
+    padding: 16px 32px; border-radius: 50px; text-decoration: none;
+    font-weight: 900; font-size: 1rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 24px rgba(255,117,31,0.32);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255,117,31,0.42); }
+  .btn-secondary {
+    background: white; color: var(--orange);
+    padding: 16px 32px; border-radius: 50px; text-decoration: none;
+    font-weight: 800; font-size: 0.95rem;
+    border: 2px solid var(--orange); transition: transform 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { background: var(--beige-dark); transform: translateY(-3px); }
+
+  .hero-img-wrap {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; animation: floatIn 0.8s ease 0.2s both;
+  }
+  .hero-img-wrap img {
+    width: 100%; max-width: 460px;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+    animation: float 4s ease-in-out infinite;
+  }
+  .hero-sticker {
+    position: absolute; background: white; border-radius: 14px;
+    padding: 9px 15px; font-weight: 800; font-size: 0.82rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+    display: flex; align-items: center; gap: 6px; color: var(--text-dark);
+  }
+  .sticker-1 { top: 8%; right: -4%; border: 2px solid var(--rose); }
+  .sticker-2 { bottom: 18%; left: -4%; border: 2px solid var(--orange); }
+
+  /* ===== SECTIONS ===== */
+  .section { padding: 80px 32px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block; background: var(--rose); color: var(--text-dark);
+    font-size: 0.78rem; font-weight: 800; padding: 5px 14px;
+    border-radius: 50px; margin-bottom: 14px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.75rem, 3.5vw, 2.7rem);
+    color: var(--text-dark); margin-bottom: 14px; line-height: 1.2;
+  }
+  .section-title span { color: var(--orange); }
+  .section-sub {
+    font-size: 1rem; color: var(--text-body);
+    max-width: 620px; line-height: 1.72; font-weight: 600;
+  }
+
+  /* ===== PROBLEM ===== */
+  .problem-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: center; margin-top: 48px;
+  }
+  .problem-list { display: flex; flex-direction: column; gap: 14px; }
+  .problem-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: white; padding: 16px 20px; border-radius: 16px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.04);
+    border-left: 4px solid var(--rose); transition: transform 0.2s;
+  }
+  .problem-item:hover { transform: translateX(6px); }
+  .problem-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .problem-item p { font-weight: 700; color: var(--text-dark); line-height: 1.5; font-size: 0.95rem; }
+  .problem-img { display: flex; justify-content: center; }
+  .problem-img img {
+    width: 78%; max-width: 320px;
+    animation: float 5s ease-in-out infinite 1s;
+    filter: drop-shadow(0 12px 28px rgba(0,0,0,0.09));
+  }
+  .cta-inline {
+    margin-top: 24px; background: #FFF8F3;
+    border: 2px dashed var(--orange); border-radius: 18px;
+    padding: 20px 24px; font-weight: 700; color: var(--text-dark);
+    font-size: 0.95rem; line-height: 1.65;
+  }
+  .cta-inline strong { color: var(--orange); }
+
+  /* ===== SOLUTION ===== */
+  .white-card {
+    background: white; border-radius: 36px; padding: 64px 48px;
+    box-shadow: 0 4px 36px rgba(0,0,0,0.05);
+  }
+  .solution-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 56px; align-items: center; margin-top: 48px;
+  }
+  .solution-img img {
+    width: 100%; max-width: 380px;
+    filter: drop-shadow(0 14px 36px rgba(0,0,0,0.09));
+    animation: float 4.5s ease-in-out infinite 0.5s;
+  }
+  .solution-points { display: flex; flex-direction: column; gap: 22px; }
+  .solution-point { display: flex; gap: 16px; align-items: flex-start; }
+  .sol-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--beige); display: flex; align-items: center;
+    justify-content: center; font-size: 1.35rem; flex-shrink: 0;
+  }
+  .sol-text h3 { font-weight: 800; font-size: 0.98rem; color: var(--text-dark); margin-bottom: 4px; }
+  .sol-text p { color: var(--gris); font-size: 0.9rem; line-height: 1.65; font-weight: 600; }
+
+  /* ===== STEPS ===== */
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 22px; margin-top: 50px;
+  }
+  .step-card {
+    background: white; border-radius: 22px; padding: 26px 20px;
+    text-align: center; box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--rose);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:nth-child(even) { border-top-color: var(--orange); }
+  .step-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.09); }
+  .step-num {
+    font-family: 'Fredoka One', cursive; font-size: 2.2rem;
+    color: var(--rose); line-height: 1; margin-bottom: 8px;
+  }
+  .step-card:nth-child(even) .step-num { color: var(--orange); }
+  .step-img {
+    width: 90px; height: 90px; object-fit: contain;
+    margin: 8px auto 12px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.09));
+  }
+  .step-card h3 { font-weight: 800; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 7px; }
+  .step-card p { color: var(--gris); font-size: 0.85rem; line-height: 1.6; font-weight: 600; }
+
+  /* ===== FEATURES ===== */
+  .features-bg {
+    background: linear-gradient(135deg, #fff8f3 0%, var(--beige) 100%);
+    border-radius: 36px; padding: 64px 48px;
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px; margin-top: 48px;
+  }
+  .feat-card {
+    background: white; border-radius: 20px; padding: 26px 22px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.04); transition: transform 0.2s;
+  }
+  .feat-card:hover { transform: translateY(-4px); }
+  .feat-emoji { font-size: 1.9rem; margin-bottom: 12px; display: block; }
+  .feat-card h3 { font-weight: 800; font-size: 0.98rem; color: var(--text-dark); margin-bottom: 7px; }
+  .feat-card p { color: var(--gris); font-size: 0.88rem; line-height: 1.65; font-weight: 600; }
+
+  /* ===== NOTION PREVIEW ===== */
+  .notion-section {
+    background: white; border-radius: 36px; padding: 64px 48px;
+    box-shadow: 0 4px 36px rgba(0,0,0,0.05);
+  }
+  .notion-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: start; margin-top: 48px;
+  }
+  .notion-text { display: flex; flex-direction: column; gap: 18px; }
+  .notion-feature {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 18px; background: var(--beige);
+    border-radius: 14px;
+  }
+  .notion-feature .nf-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .notion-feature h4 { font-weight: 800; color: var(--text-dark); font-size: 0.92rem; margin-bottom: 3px; }
+  .notion-feature p { color: var(--gris); font-size: 0.85rem; line-height: 1.55; font-weight: 600; }
+  .notion-screenshots {
+    display: flex; flex-direction: column; gap: 16px; position: relative;
+  }
+  .phone-frame {
+    background: white; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    border: 2px solid #eee; position: relative;
+  }
+  .phone-frame img { width: 100%; display: block; }
+  .blur-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(to bottom, transparent, rgba(255,238,224,0.95));
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 14px;
+  }
+  .blur-tag {
+    background: var(--orange); color: white;
+    font-size: 0.75rem; font-weight: 800; padding: 5px 14px;
+    border-radius: 50px; letter-spacing: 0.5px;
+  }
+  .notion-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--rose); color: var(--text-dark);
+    font-size: 0.82rem; font-weight: 800;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 10px;
+  }
+
+  /* ===== AUDIENCES ===== */
+  .audience-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px; margin-top: 48px;
+  }
+  .audience-card {
+    background: white; border-radius: 20px; padding: 26px 20px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    border-bottom: 4px solid var(--orange); transition: transform 0.2s;
+  }
+  .audience-card:nth-child(2) { border-bottom-color: var(--rose); }
+  .audience-card:nth-child(3) { border-bottom-color: #FFB347; }
+  .audience-card:nth-child(4) { border-bottom-color: #8BC49A; }
+  .audience-card:nth-child(5) { border-bottom-color: var(--rose); }
+  .audience-card:hover { transform: translateY(-4px); }
+  .audience-icon { font-size: 2.1rem; margin-bottom: 11px; }
+  .audience-card h3 { font-weight: 800; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 7px; }
+  .audience-card p { color: var(--gris); font-size: 0.85rem; line-height: 1.6; font-weight: 600; }
+
+  /* ===== FOUNDERS ===== */
+  .founders-section {
+    background: var(--orange); border-radius: 36px;
+    padding: 70px 48px; color: white; position: relative; overflow: hidden;
+  }
+  .founders-section::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.08); border-radius: 50%;
+  }
+  .founders-section::after {
+    content: ''; position: absolute; bottom: -80px; left: 8%;
+    width: 360px; height: 360px;
+    background: rgba(255,255,255,0.05); border-radius: 50%;
+  }
+  .founders-inner {
+    position: relative; z-index: 2; max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 56px; align-items: center;
+  }
+  .founders-section .section-tag { background: rgba(255,255,255,0.22); color: white; }
+  .founders-section .section-title { color: white; }
+  .founders-section .section-sub { color: rgba(255,255,255,0.88); max-width: 100%; }
+  .founders-img { display: flex; justify-content: center; }
+  .founders-img img {
+    width: 100%; max-width: 360px;
+    filter: drop-shadow(0 16px 36px rgba(0,0,0,0.18));
+    animation: float 5s ease-in-out infinite;
+  }
+
+  /* urgency bar */
+  .urgency-bar {
+    background: #FFD700; color: var(--text-dark); font-weight: 900;
+    font-size: 0.88rem; text-align: center; padding: 10px 24px;
+    border-radius: 50px; margin-top: 28px; display: inline-block;
+  }
+
+  /* ===== PRICING ===== */
+  .pricing-wrapper { max-width: 820px; margin: 50px auto 0; }
+  .pricing-hero-card {
+    background: var(--orange); border-radius: 28px; padding: 40px 36px;
+    color: white; position: relative; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(255,117,31,0.32);
+    margin-bottom: 24px;
+  }
+  .pricing-hero-card::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08); border-radius: 50%;
+  }
+  .phc-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+  .phc-badge {
+    background: #FFD700; color: var(--text-dark); font-size: 0.78rem;
+    font-weight: 900; padding: 4px 14px; border-radius: 50px;
+    display: inline-block; margin-bottom: 10px;
+  }
+  .phc-title { font-family: 'Fredoka One', cursive; font-size: 1.8rem; margin-bottom: 6px; }
+  .phc-desc { font-size: 0.92rem; color: rgba(255,255,255,0.88); line-height: 1.65; font-weight: 600; margin-bottom: 18px; }
+  .phc-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .phc-features li {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 0.9rem; font-weight: 700; color: white;
+  }
+  .phc-features li::before {
+    content: '✓'; width: 20px; height: 20px;
+    background: rgba(255,255,255,0.22); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; flex-shrink: 0;
+  }
+  .phc-price-block { text-align: center; flex-shrink: 0; }
+  .phc-amount {
+    font-family: 'Fredoka One', cursive; font-size: 3.8rem;
+    color: #FFD700; line-height: 1;
+  }
+  .phc-period { font-size: 0.85rem; color: rgba(255,255,255,0.8); font-weight: 700; margin-bottom: 8px; }
+  .phc-spots {
+    background: rgba(255,255,255,0.18); border-radius: 12px;
+    padding: 8px 14px; font-size: 0.8rem; font-weight: 800; color: white;
+  }
+
+  .next-prices {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .next-price-card {
+    background: white; border-radius: 20px; padding: 26px 24px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--rose);
+  }
+  .next-price-card:last-child { border-top-color: var(--gris); opacity: 0.8; }
+  .npc-phase {
+    font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gris); margin-bottom: 6px;
+  }
+  .npc-name { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 8px; }
+  .npc-amount { font-family: 'Fredoka One', cursive; font-size: 2.4rem; color: var(--orange); line-height: 1; }
+  .npc-period { font-size: 0.82rem; color: var(--gris); font-weight: 700; margin-bottom: 10px; }
+  .npc-desc { font-size: 0.85rem; color: var(--gris); line-height: 1.6; font-weight: 600; }
+
+  .pricing-note {
+    background: #FFF8F3; border: 2px dashed var(--orange);
+    border-radius: 16px; padding: 18px 24px; text-align: center;
+    font-weight: 700; color: var(--text-dark); font-size: 0.92rem;
+    margin-top: 22px; line-height: 1.6;
+  }
+  .pricing-note strong { color: var(--orange); }
+
+  /* ===== FAQ ===== */
+  .faq-list {
+    max-width: 780px; margin: 48px auto 0;
+    display: flex; flex-direction: column; gap: 11px;
+  }
+  details {
+    background: white; border-radius: 16px;
+    padding: 20px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    cursor: pointer;
+  }
+  details[open] { border-left: 4px solid var(--orange); }
+  summary {
+    font-weight: 800; font-size: 0.97rem; color: var(--text-dark);
+    list-style: none; display: flex;
+    justify-content: space-between; align-items: center; gap: 12px;
+  }
+  summary::after {
+    content: '+'; font-size: 1.35rem; color: var(--orange);
+    flex-shrink: 0; transition: transform 0.2s;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p {
+    margin-top: 12px; color: var(--text-body);
+    font-size: 0.93rem; line-height: 1.7; font-weight: 600;
+  }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    text-align: center; padding: 100px 32px; position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, var(--rose) 0%, transparent 70%);
+    opacity: 0.22;
+  }
+  .final-cta-inner { position: relative; z-index: 2; max-width: 660px; margin: 0 auto; }
+  .final-cta img {
+    width: 180px; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.1));
+    animation: float 4s ease-in-out infinite; margin-bottom: 22px;
+  }
+  .final-cta h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+    color: var(--text-dark); margin-bottom: 14px;
+  }
+  .final-cta h2 span { color: var(--orange); }
+  .final-cta p {
+    color: var(--text-body); font-size: 1rem; font-weight: 600;
+    line-height: 1.7; margin-bottom: 34px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #1E0F04; color: rgba(255,255,255,0.55);
+    text-align: center; padding: 36px 32px; font-size: 0.85rem; font-weight: 600;
+  }
+  footer a { color: var(--rose); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-11px); }
+  }
+  @keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    80% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(28px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes floatIn {
+    from { transform: translateY(18px) scale(0.96); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+
+  /* ===== REVEAL ===== */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 12px 16px; }
+    .nav-links { display: none; }
+    .hero-inner, .problem-grid, .solution-grid,
+    .founders-inner, .notion-grid, .phc-inner { grid-template-columns: 1fr; }
+    .hero-img-wrap { order: -1; }
+    .founders-img { text-align: center; }
+    .founders-img img { max-width: 240px; }
+    .section { padding: 56px 18px; }
+    .white-card, .features-bg, .founders-section, .notion-section { padding: 44px 22px; }
+    .sticker-1, .sticker-2 { display: none; }
+    .next-prices { grid-template-columns: 1fr; }
+    .phc-price-block { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">🦝 T'as vu le prix ?</a>
+  <ul class="nav-links">
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#apercu">Aperçu</a></li>
+    <li><a href="#tarifs">Tarifs</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://tally.so/r/81rZXo" target="_blank" class="nav-cta">Rejoins la Team 🎀</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">🦝 Rencontre Pépette, ta nouvelle alliée budget</div>
+      <h1>Gérer ton argent, <span>ça peut être fun</span> (promis !)</h1>
+      <p class="hero-sub">
+        Fini la honte, fini l'angoisse de fin de mois, fini les tableaux Excel qui te donnent des sueurs froides.
+        Avec Pépette, tu <strong>pépetises tes comptes</strong> avec le sourire. ✨
+      </p>
+      <div class="hero-btns">
+        <a href="https://www.instagram.com/tasvuleprix" target="_blank" class="btn-primary">Je rejoins la Team 🦝💸</a>
+        <a href="#comment" class="btn-secondary">Voir comment ça marche</a>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="0C9CB2E5-D5A7-4EDE-BC0A-3909D1847B91.png" alt="T'as vu le prix ? avec Pépette">
+      <div class="hero-sticker sticker-1">🎀 5 places Fondatrices à 9,99€/mois</div>
+      <div class="hero-sticker sticker-2">✨ Sans jugement. Sans jargon.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLÈME ===== -->
+<section class="section" id="probleme">
+  <div class="section-inner">
+    <div class="section-tag">😬 Le problème</div>
+    <h2 class="section-title">Tu te <span>reconnais</span> là-dedans ?</h2>
+    <p class="section-sub">Chaque mois, c'est la même histoire qui se répète… et c'est pas une fatalité.</p>
+
+    <div class="problem-grid reveal">
+      <div class="problem-list">
+        <div class="problem-item">
+          <span class="problem-icon">😰</span>
+          <p>Tu finis le mois avec la boule au ventre à regarder ton solde</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-icon">🙈</span>
+          <p>Tu refuses des sorties parce que ton compte est dans le rouge… et t'as honte</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-icon">❓</span>
+          <p>Tu sais pas où passe ton argent et t'as zéro épargne pour les coups durs</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-icon">💔</span>
+          <p>Tes rêves restent des rêves parce que t'arrives jamais à mettre de côté</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-icon">📚</span>
+          <p>On t'a appris à gagner de l'argent… mais jamais à le gérer</p>
+        </div>
+        <div class="cta-inline">
+          <strong>Et si le problème c'était pas toi,</strong> mais les outils qu'on t'a donnés (ou pas donnés) ? Pépette est là pour changer ça. 🦝✨
+        </div>
+      </div>
+      <div class="problem-img">
+        <img src="copy_9D5BD919-9088-4F2E-9EAC-7CCF65E37D05.png" alt="Pépette cache ses yeux">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="white-card reveal">
+      <div class="section-tag">✨ La solution</div>
+      <h2 class="section-title">Voici <span>T'as vu le prix ?</span> 🦝</h2>
+      <p class="section-sub">L'app qui transforme la gestion budgétaire en expérience fun, motivante et 100% sans jugement.</p>
+      <div class="solution-grid">
+        <div class="solution-img">
+          <img src="copy_349C7BC9-3AC1-4119-BE09-F3031BBF5F7E.png" alt="Pépette rêve plage">
+        </div>
+        <div class="solution-points">
+          <div class="solution-point">
+            <div class="sol-icon">🎀</div>
+            <div class="sol-text">
+              <h3>Déculpabilise-toi</h3>
+              <p>Pépette t'accompagne avec bienveillance, pas pour te juger. L'argent, c'est pas tabou ici.</p>
+            </div>
+          </div>
+          <div class="solution-point">
+            <div class="sol-icon">🎮</div>
+            <div class="sol-text">
+              <h3>Amuse-toi</h3>
+              <p>Gérer ton argent devient un jeu motivant avec des défis, des badges et des récompenses à chaque étape.</p>
+            </div>
+          </div>
+          <div class="solution-point">
+            <div class="sol-icon">🌟</div>
+            <div class="sol-text">
+              <h3>Réalise tes rêves</h3>
+              <p>Visualise ton objectif et regarde-le se concrétiser mois après mois. Vacances, sac, voiture… tout est possible.</p>
+            </div>
+          </div>
+          <div class="solution-point">
+            <div class="sol-icon">🫙</div>
+            <div class="sol-text">
+              <h3>Tes petits bocaux</h3>
+              <p>Crée des mini-budgets par catégorie et suis chaque euro en temps réel. Simple, visuel, efficace.</p>
+            </div>
+          </div>
+          <div class="solution-point">
+            <div class="sol-icon">💬</div>
+            <div class="sol-text">
+              <h3>Une communauté qui te comprend</h3>
+              <p>Rejoins la #TeamPépette, partage tes victoires et avance entourée de personnes comme toi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMENT ÇA MARCHE ===== -->
+<section class="section" id="comment">
+  <div class="section-inner">
+    <div class="section-tag">🗺️ Comment ça marche</div>
+    <h2 class="section-title">En <span>5 étapes simples</span>, tu transformes ta relation avec l'argent</h2>
+    <p class="section-sub">Pas besoin d'être experte en finance. Pépette te guide à chaque pas.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <img class="step-img" src="copy_F0F91F16-0A5A-489D-B672-2495A6176B80.png" alt="Pépette clin d'oeil">
+        <h3>Fais ton état des lieux</h3>
+        <p>Pépette t'aide à comprendre où tu en es, sans jugement, juste avec bienveillance.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">02</div>
+        <img class="step-img" src="9A4C5243-CC7E-48E2-9FF4-9097A1BB47CA.png" alt="Pépette rêve">
+        <h3>Définis ton rêve</h3>
+        <p>Voyage, voiture, sac… Choisis ton objectif et visualise-le chaque jour.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">03</div>
+        <img class="step-img" src="28DD1E60-CBE8-4A39-97BB-E222FEF45E5C.png" alt="Pépette bocal pièces">
+        <h3>Crée tes mini-budgets</h3>
+        <p>Courses, carburant, loisirs… Des enveloppes pour tout garder sous contrôle.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">04</div>
+        <img class="step-img" src="ED80C67E-F783-481A-87AC-26C193B8860F.png" alt="Pépette horloge">
+        <h3>Suis au quotidien</h3>
+        <p>Pépette te rappelle gentiment d'inscrire tes dépenses. Tu sais toujours combien il te reste.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">05</div>
+        <img class="step-img" src="D1C32B7B-25DC-439C-849D-90AE688D8AED.png" alt="Pépette poing levé">
+        <h3>Récolte tes récompenses</h3>
+        <p>Chaque euro économisé te rapproche de ton rêve. Révélation finale garantie. 🎉</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="features-bg reveal">
+      <div class="section-tag">⚡ Fonctionnalités</div>
+      <h2 class="section-title">Tout ce dont tu as besoin <span>pour réussir</span></h2>
+      <p class="section-sub">Une boîte à outils complète pour reprendre enfin le contrôle.</p>
+      <div class="features-grid">
+        <div class="feat-card">
+          <span class="feat-emoji">📊</span>
+          <h3>Suivi ultra-précis</h3>
+          <p>Sache exactement où va chaque euro. Terminé, le flou artistique sur ton compte.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">🔔</span>
+          <h3>Alertes intelligentes</h3>
+          <p>Pépette te prévient avant que tu dépasses ton quota. Plus de mauvaises surprises.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">🌅</span>
+          <h3>Visualisation de tes rêves</h3>
+          <p>Ton image de rêve se dévoile au fur et à mesure que tu épargnes. Une motivation unique !</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">🫙</span>
+          <h3>Mini-budgets personnalisés</h3>
+          <p>Autant d'enveloppes que tu veux. Courses, carburant, loisirs, enfants… t'es la boss.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">🏆</span>
+          <h3>Défis & récompenses</h3>
+          <p>Niveaux, badges, trophées. Gérer son budget n'a jamais été aussi addictif.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">👯</span>
+          <h3>Communauté #TeamPépette</h3>
+          <p>Partage tes victoires, échange des astuces. Parce qu'on est plus fortes ensemble.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">📅</span>
+          <h3>Calendrier financier</h3>
+          <p>Planifie tes dépenses futures. Plus jamais la facture surprise qui plombe tout.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-emoji">📈</span>
+          <h3>Bilan mensuel</h3>
+          <p>Analyse ton évolution mois après mois. Tu vas te surprendre toi-même. 🦝✨</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APERÇU ESPACE FONDATRICES ===== -->
+<section class="section" id="apercu">
+  <div class="section-inner">
+    <div class="notion-section reveal">
+      <div class="notion-badge">🔒 Aperçu exclusif</div>
+      <h2 class="section-title">L'espace <span>Membres Fondatrices</span></h2>
+      <p class="section-sub">En attendant l'app officielle, les 5 Membres Fondatrices auront accès à un espace dédié avec tout ce qu'il faut pour commencer à pépetiser leurs comptes dès maintenant.</p>
+
+      <div class="notion-grid">
+        <div class="notion-text">
+          <div class="notion-feature">
+            <span class="nf-icon">💰</span>
+            <div>
+              <h4>Budget Pépettisé</h4>
+              <p>Ton tableau de bord pour saisir revenus, charges fixes et calculer ton vrai budget disponible.</p>
+            </div>
+          </div>
+          <div class="notion-feature">
+            <span class="nf-icon">🌈</span>
+            <div>
+              <h4>Rêves — Ton objectif</h4>
+              <p>Définis ton grand pourquoi et suis ta progression vers ton objectif d'épargne.</p>
+            </div>
+          </div>
+          <div class="notion-feature">
+            <span class="nf-icon">🫙</span>
+            <div>
+              <h4>Mes Bocaux</h4>
+              <p>Tes mini-budgets par catégorie : Courses, Plaisir, Voyages, Enfants, Cadeaux…</p>
+            </div>
+          </div>
+          <div class="notion-feature">
+            <span class="nf-icon">🦝</span>
+            <div>
+              <h4>Défi Pépette</h4>
+              <p>Mini-jeux et défis pour épargner et rester motivée tout le mois.</p>
+            </div>
+          </div>
+          <div class="notion-feature">
+            <span class="nf-icon">📊</span>
+            <div>
+              <h4>Bilan mensuel</h4>
+              <p>Le récap de tes dépenses et de tes progrès, pour célébrer chaque victoire.</p>
+            </div>
+          </div>
+          <div style="margin-top:8px; padding:14px 18px; background:var(--rose); border-radius:14px; font-weight:700; color:var(--text-dark); font-size:0.88rem; line-height:1.6;">
+            🔒 L'accès complet est réservé aux <strong>5 Membres Fondatrices</strong>. Les captures ci-contre sont volontairement floues pour préserver la surprise… 😉
+          </div>
+        </div>
+
+        <div class="notion-screenshots">
+          <div class="phone-frame">
+            <img src="copy_58C6F79A-FB56-4521-BBF4-ACEFB987201A.jpeg" alt="Aperçu espace Notion - tableau de bord">
+            <div class="blur-overlay">
+              <span class="blur-tag">✨ Réservé aux Fondatrices</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AUDIENCES ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">💛 Pour qui ?</div>
+    <h2 class="section-title">T'as vu le prix ? est fait <span>pour toi</span> si…</h2>
+    <p class="section-sub">Que tu aies 14 ans ou 70 ans, Pépette s'adapte à ta situation sans jamais te juger.</p>
+    <div class="audience-grid reveal">
+      <div class="audience-card">
+        <div class="audience-icon">👨‍👩‍👧‍👦</div>
+        <h3>Familles</h3>
+        <p>Les fins de mois sont serrées. Tu veux reprendre le contrôle avant que les dépenses te dépassent.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">💑</div>
+        <h3>Couples</h3>
+        <p>Tu profites à fond mais tu sais jamais où passe l'argent. Zéro épargne et les galères font mal.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🎓</div>
+        <h3>Étudiants & jeunes actifs</h3>
+        <p>T'arrives dans la vraie vie sans base en gestion budgétaire. Pépette t'apprend les bonnes habitudes.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🌿</div>
+        <h3>Retraités</h3>
+        <p>Tes revenus ont baissé mais tu veux garder une belle qualité de vie. Réapprendre avec moins, sans stress.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🃏</div>
+        <h3>Ados dès 14 ans</h3>
+        <p>Première carte bancaire ? Apprends les bases de façon fun, sans tes parents sur le dos à chaque achat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEMBRES FONDATRICES CTA ===== -->
+<section class="section" id="rejoindre">
+  <div class="section-inner">
+    <div class="founders-section reveal">
+      <div class="founders-inner">
+        <div>
+          <div class="section-tag">🎀 Offre ultra-exclusive</div>
+          <h2 class="section-title" style="color:white;">Deviens<br><span style="color:#FFD700;">Membre Fondatrice</span></h2>
+          <p class="section-sub">Sois parmi les <strong style="color:#FFD700;">5 premières</strong> à tester T'as vu le prix ? en avant-première dès le 15 juin. Tu accèdes à l'espace Fondatrices, tu donnes ton avis direct sur les fonctionnalités, et tu bénéficies d'un tarif à vie qu'on ne proposera plus jamais.</p>
+          <div class="urgency-bar">⚡ 5 places seulement · Dès le 15 juin 2026</div>
+          <br><br>
+          <a href="https://tally.so/r/81rZXo" target="_blank" class="btn-primary" style="background:white; color:var(--orange);">
+            Je veux être Fondatrice 🦝✨ — Formulaire
+          </a>
+        </div>
+        <div class="founders-img">
+          <img src="8046F0EA-742A-4583-9406-54D613F456DA.png" alt="Pépette à son bureau fondatrice">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TARIFS ===== -->
+<section class="section" id="tarifs">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:680px; margin:0 auto;">
+      <div class="section-tag">💸 Tarifs</div>
+      <h2 class="section-title">Plus tôt tu rejoins, <span>moins tu paieras</span> — pour toujours</h2>
+      <p class="section-sub" style="margin:0 auto;">Les tarifs augmentent à chaque phase. Le tarif Fondatrice ne reviendra jamais. Ce n'est pas du marketing — c'est la réalité du lancement. 😌</p>
+    </div>
+
+    <div class="pricing-wrapper reveal">
+      <!-- CARTE PRINCIPALE FONDATRICES -->
+      <div class="pricing-hero-card">
+        <div class="phc-inner">
+          <div>
+            <div class="phc-badge">⭐ Maintenant — Dès le 15 juin</div>
+            <div class="phc-title">Membre Fondatrice 🎀</div>
+            <p class="phc-desc">Tu accèdes en avant-première, tu shapes l'app avec nous, et tu gardes ce tarif <strong>pour toujours</strong>. Seulement 5 places. Une fois prises, c'est fini.</p>
+            <ul class="phc-features">
+              <li>Accès immédiat à l'espace Fondatrices sur Notion</li>
+              <li>Influence directe sur le développement de l'app</li>
+              <li>Badge Fondatrice exclusif dans l'app au lancement</li>
+              <li>Accès à la communauté privée #TeamPépette</li>
+              <li>Accompagnement personnalisé par Pépette 🦝</li>
+              <li>Tarif bloqué à 9,99€/mois à vie</li>
+            </ul>
+            <a href="https://tally.so/r/81rZXo" target="_blank" class="btn-primary" style="background:white; color:var(--orange);">
+              Je veux ma place Fondatrice 🎀
+            </a>
+            <a href="https://www.instagram.com/tasvuleprix" target="_blank" style="display:inline-flex; align-items:center; gap:8px; margin-top:12px; color:white; font-weight:800; font-size:0.9rem; text-decoration:none;">
+              📱 Suivre sur Instagram
+            </a>
+          </div>
+          <div class="phc-price-block">
+            <div class="phc-amount">9,99€</div>
+            <div class="phc-period">/ mois · à vie 🎉</div>
+            <div class="phc-spots">🦝 5 places seulement</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROCHAINES PHASES -->
+      <div class="next-prices">
+        <div class="next-price-card">
+          <div class="npc-phase">Pré-lancement · 15 → 31 août 2026</div>
+          <div class="npc-name">Early Adopter</div>
+          <div class="npc-amount">14,99€</div>
+          <div class="npc-period">/ mois · à vie · 100 places</div>
+          <p class="npc-desc">Pour les 100 premières après la phase test. Tarif avantageux garanti à vie, mais plus du tout au tarif Fondatrice.</p>
+        </div>
+        <div class="next-price-card">
+          <div class="npc-phase">Lancement officiel · 1er sept 2026</div>
+          <div class="npc-name">Abonnement standard</div>
+          <div class="npc-amount">19,99€</div>
+          <div class="npc-period">/ mois</div>
+          <p class="npc-desc">Le tarif plein. Toutes les fonctionnalités, mais bien plus cher qu'être fondatrice. Tu auras été prévenue. 😉</p>
+        </div>
+      </div>
+
+      <div class="pricing-note">
+        💡 Oui, c'est un abonnement de plus. Mais c'est celui qui va t'aider à gérer <strong>tous les autres</strong>. En économisant sur les achats impulsifs et en évitant les découverts, tu te rentabilises très vite. Et à 9,99€/mois, c'est <strong>moins de 0,33€ par jour</strong>. Soit moins qu'un bonbon. 🍬
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:10px;">
+      <div class="section-tag">❓ FAQ</div>
+      <h2 class="section-title">Questions <span>fréquentes</span></h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Pourquoi payer un abonnement alors que je galère déjà financièrement ?</summary>
+        <p>Bonne question ! C'est l'investissement qui va t'aider à gérer TOUS les autres. En économisant sur tes achats impulsifs et en évitant les découverts, tu te rentabilises très rapidement. Et au tarif Fondatrice, c'est moins de 0,33€ par jour — soit moins qu'un bonbon. 🍬</p>
+      </details>
+      <details>
+        <summary>Est-ce que T'as vu le prix ? fonctionne vraiment pour tout le monde ?</summary>
+        <p>Absolument ! Que tu sois étudiant·e, retraité·e, parent, couple ou ado avec ta première carte — Pépette s'adapte à ta situation. Il n'y a pas de profil "type" ici, juste des gens qui veulent reprendre le contrôle de leur argent sans prise de tête. 🦝</p>
+      </details>
+      <details>
+        <summary>Je ne suis pas douée avec les chiffres, est-ce compliqué ?</summary>
+        <p>Pas du tout ! T'as vu le prix ? est conçu pour être ultra simple. Pas de jargon, pas de tableurs, pas de maths compliquées. Pépette t'explique tout avec des mots normaux et beaucoup de bienveillance. ✨</p>
+      </details>
+      <details>
+        <summary>C'est quoi exactement l'espace Fondatrices sur Notion ?</summary>
+        <p>En attendant le lancement de l'app officielle le 1er septembre, les 5 Membres Fondatrices ont accès à un espace complet sur Notion : tableau de budget, bocaux de dépenses, suivi de rêves, défis Pépette et bilan mensuel. C'est la version "avant l'app" — fonctionnelle et déjà bien fun. 🦝</p>
+      </details>
+      <details>
+        <summary>Puis-je annuler mon abonnement à tout moment ?</summary>
+        <p>Oui ! Aucun engagement de durée, tu peux annuler quand tu veux. Mais si tu annules, tu perds ton tarif Fondatrice à vie. Alors réfléchis bien avant ! 😉</p>
+      </details>
+      <details>
+        <summary>Qu'est-ce qui rend T'as vu le prix ? différent des autres apps de budget ?</summary>
+        <p>La plupart des apps de budget sont froides, compliquées et démotivantes. T'as vu le prix ?, c'est une expérience fun, gamifiée et bienveillante. Pépette est là pour t'encourager, pas pour te juger. Les défis, la communauté, la visualisation de tes rêves… ça change vraiment tout. 🎮</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-inner reveal">
+    <img src="D1C32B7B-25DC-439C-849D-90AE688D8AED.png" alt="Pépette victoire">
+    <h2>Prête à <span>pépetiser tes comptes</span> ? 🦝✨</h2>
+    <p>5 places. Un tarif à vie. Un espace dédié dès le 15 juin. Ton futur toi te remerciera d'avoir cliqué sur ce bouton aujourd'hui. 🎀</p>
+    <a href="https://www.instagram.com/tasvuleprix" target="_blank" class="btn-primary" style="font-size:1.08rem; padding:18px 36px;">
+      Je rejoins la #TeamPépette 🦝💸
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p style="margin-bottom:10px; font-family:'Fredoka One', cursive; font-size:1.2rem; color:var(--rose);">T'as vu le prix ? 🦝</p>
+  <p>© 2026 T'as vu le prix ? · <a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a> · <a href="#">CGV</a></p>
+  <p style="margin-top:7px; font-size:0.78rem; opacity:0.6;">Fait avec 💛 et beaucoup de Pépette</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger children
+  document.querySelectorAll('.features-grid .feat-card, .audience-grid .audience-card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.07}s`;
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
