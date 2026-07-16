@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T'as vu le prix ? 🦝 – L'application de budget qui transforme tes rêves en projets</title>
+<link rel="icon" type="image/png" href="assets/icone-app.png">
+<link href="https://fonts.googleapis.com/css2?family=Handlee&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF751F;
+    --orange-dark: #D95D14;
+    --beige: #FFF4EE;
+    --beige-soft: #FFF9F5;
+    --jaune: #FFE000;
+    --jaune-soft: #FFF4A8;
+    --marron: #7C461C;
+    --marron-dark: #4F2A10;
+    --text-dark: #7C461C;
+    --text-body: #5F3A20;
+    --gris: #6F6258;
+    --blanc: #FFFFFF;
+    --font-title: 'Outfit', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-accent: 'Handlee', cursive;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background-color: var(--beige);
+    background-image: url('assets/fond-gingham.jpeg');
+    background-repeat: repeat;
+    background-size: 320px auto;
+    background-attachment: fixed;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(255,249,245,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(124,70,28,0.14);
+    padding: 14px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--font-title);
+    font-size: 1.3rem; color: var(--orange); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-body);
+    font-weight: 700; font-size: 0.88rem; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white !important;
+    padding: 10px 24px; border-radius: 50px;
+    font-weight: 900 !important; font-size: 0.85rem !important;
+    transition: transform 0.2s, background 0.2s !important;
+    box-shadow: 0 4px 16px rgba(255,117,31,0.3);
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; transform: translateY(-2px); }
+
+  /* ===== BOUTONS ===== */
+  .btn-primary {
+    background: var(--orange); color: white;
+    padding: 18px 36px; border-radius: 50px; text-decoration: none;
+    font-weight: 900; font-size: 1.05rem;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 6px 24px rgba(255,117,31,0.32);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(255,117,31,0.42); }
+  .btn-ghost {
+    background: transparent; color: var(--text-body);
+    padding: 18px 32px; border-radius: 50px; text-decoration: none;
+    font-weight: 800; font-size: 0.95rem;
+    border: 2px solid rgba(92,61,30,0.2);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 60px 80px;
+    gap: 64px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .hero-text { position: relative; }
+  .hero-annee {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--jaune-soft); color: var(--text-dark);
+    font-size: 0.82rem; font-weight: 900; padding: 8px 18px;
+    border-radius: 50px; margin-bottom: 24px;
+    letter-spacing: 1px; animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: var(--font-title);
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.08; color: var(--text-dark);
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+  .hero h1 .hl { color: var(--orange); }
+  .hero-lettre {
+    font-size: 1.05rem; color: var(--text-body); line-height: 1.85;
+    font-weight: 600; margin-bottom: 16px;
+    animation: fadeUp 0.7s ease 0.2s both;
+    max-width: 520px;
+  }
+  .hero-lettre strong { color: var(--text-dark); font-weight: 900; }
+  .hero-sig {
+    font-family: var(--font-title);
+    font-size: 1.1rem; color: var(--orange);
+    margin-bottom: 36px; display: block;
+    animation: fadeUp 0.7s ease 0.25s both;
+  }
+  .hero-actions {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+  .hero-visual { position: relative; animation: fadeIn 0.9s ease 0.2s both; }
+  .hero-visual img {
+    width: 100%; border-radius: 28px;
+    box-shadow: 0 24px 80px rgba(61,32,0,0.15);
+  }
+  .hero-note {
+    position: absolute; background: white; border-radius: 14px;
+    padding: 12px 18px; font-weight: 800; font-size: 0.8rem;
+    box-shadow: 0 6px 24px rgba(61,32,0,0.1);
+    display: flex; align-items: center; gap: 8px; color: var(--text-dark);
+  }
+  .hero-note-1 { bottom: -18px; left: -16px; border: 2px solid var(--jaune-soft); animation: float 4s ease-in-out infinite; }
+  .hero-note-2 { top: 20px; right: -16px; border: 2px solid var(--orange); animation: float 4s ease-in-out 1.2s infinite; }
+
+  /* ===== SECTIONS BASE ===== */
+  .section { padding: 96px 40px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-block; font-size: 0.75rem; font-weight: 900;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 16px;
+  }
+  .titre {
+    font-family: var(--font-title);
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    color: var(--text-dark); line-height: 1.15; margin-bottom: 16px;
+  }
+  .titre span { color: var(--orange); }
+  .corps {
+    font-size: 1.02rem; color: var(--text-body);
+    line-height: 1.8; font-weight: 600; max-width: 600px;
+  }
+
+
+  .hero-proof {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blanc); border: 2px solid rgba(255,117,31,0.18);
+    color: var(--orange); font-weight: 900; font-size: 0.82rem;
+    padding: 8px 16px; border-radius: 50px; margin: 0 0 18px;
+    animation: fadeUp 0.7s ease 0.18s both;
+  }
+  .hero-clarity {
+    font-size: 1.08rem; color: var(--orange); line-height: 1.7;
+    font-weight: 900; margin-bottom: 18px; max-width: 560px;
+    animation: fadeUp 0.7s ease 0.15s both;
+  }
+  .hero-reassurance {
+    font-size: 0.86rem; color: var(--gris); font-weight: 800;
+    margin-top: 14px; animation: fadeUp 0.7s ease 0.35s both;
+  }
+
+  /* ===== APP PREVIEW ===== */
+  .app-preview { background: var(--blanc); }
+  .preview-intro { text-align: center; max-width: 760px; margin: 0 auto 52px; }
+  .preview-stack { display: flex; flex-direction: column; gap: 56px; }
+  .preview-item {
+    display: grid; grid-template-columns: 0.82fr 1fr; gap: 52px;
+    align-items: center; background: var(--beige-soft); border: 1px solid rgba(124,70,28,0.10); border-radius: 32px;
+    padding: 42px; box-shadow: 0 8px 36px rgba(115,115,115,0.08);
+  }
+  .preview-item:nth-child(even) .preview-copy { order: 2; }
+  .preview-item:nth-child(even) .preview-phone { order: 1; }
+  .preview-kicker { font-size: 0.8rem; font-weight: 900; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .preview-copy h3 { font-family: var(--font-title); color: var(--orange); font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 14px; }
+  .preview-copy p { color: var(--gris); font-weight: 700; font-size: 1rem; line-height: 1.8; }
+  .preview-phone img { width: 100%; max-width: 360px; display: block; margin: 0 auto; border-radius: 28px; box-shadow: 0 18px 58px rgba(115,115,115,0.18); }
+  .proof-banner {
+    margin: 54px auto 0; max-width: 860px; background: var(--orange); color: white;
+    border-radius: 22px; padding: 24px 30px; text-align: center;
+    box-shadow: 0 12px 38px rgba(255,117,31,0.25);
+  }
+  .proof-banner strong { color: #fff; font-weight: 900; }
+  .proof-banner p { font-size: 1rem; line-height: 1.7; font-weight: 800; }
+
+  /* ===== DIFFÉRENCE ===== */
+  .diff-table { max-width: 860px; margin: 48px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .diff-col { background: var(--blanc); border-radius: 22px; padding: 26px; box-shadow: 0 4px 24px rgba(115,115,115,0.06); }
+  .diff-col h3 { font-family: var(--font-title); color: var(--orange); margin-bottom: 16px; font-size: 1.18rem; }
+  .diff-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .diff-col li { color: var(--gris); font-size: 0.93rem; font-weight: 750; line-height: 1.55; }
+
+  /* ===== 2016 ===== */
+  .section-2016 { background: var(--blanc); }
+  .message-2016 {
+    max-width: 560px; margin: 56px auto 0;
+    background: var(--beige-soft); border: 1px solid rgba(124,70,28,0.10); border-radius: 24px; padding: 40px;
+    position: relative; box-shadow: 0 8px 40px rgba(61,32,0,0.07);
+  }
+  .message-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 24px; padding-bottom: 18px;
+    border-bottom: 1px solid rgba(61,32,0,0.08);
+  }
+  .message-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--jaune-soft); display: flex; align-items: center;
+    justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+  }
+  .message-from { font-weight: 900; font-size: 0.95rem; color: var(--text-dark); }
+  .message-date { font-size: 0.78rem; color: var(--gris); font-weight: 600; }
+  .message-body {
+    font-size: 1rem; color: var(--text-dark); line-height: 1.8;
+    font-weight: 700; font-style: italic;
+  }
+  .message-body span { color: var(--orange); }
+  .message-footer {
+    margin-top: 24px; padding-top: 18px;
+    border-top: 1px solid rgba(61,32,0,0.08);
+    font-size: 0.82rem; color: var(--gris); font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .message-mystere {
+    margin-top: 32px; text-align: center;
+    font-size: 0.95rem; color: var(--text-body); font-weight: 700; line-height: 1.7;
+  }
+  .message-mystere strong { color: var(--orange); }
+
+  /* ===== PROBLÈME ===== */
+  .pb-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center; margin-top: 56px;
+  }
+  .pb-items { display: flex; flex-direction: column; }
+  .pb-item {
+    padding: 22px 0; border-bottom: 1px solid rgba(92,61,30,0.08);
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .pb-item:last-child { border-bottom: none; }
+  .pb-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+  .pb-item h3 { font-weight: 900; font-size: 0.98rem; color: var(--text-dark); margin-bottom: 4px; }
+  .pb-item p { font-size: 0.9rem; color: var(--gris); line-height: 1.65; font-weight: 600; }
+  .pb-img img { width: 100%; border-radius: 24px; box-shadow: 0 16px 56px rgba(61,32,0,0.1); }
+  .pb-note {
+    margin-top: 28px; padding: 20px 24px;
+    background: var(--beige-soft); border: 1px solid rgba(124,70,28,0.10); border-radius: 16px;
+    font-weight: 700; font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+    border-left: 4px solid var(--orange);
+  }
+  .pb-note strong { color: var(--orange); }
+
+  /* ===== PEPETTE ===== */
+  .pepette-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: center;
+  }
+  .pepette-img img { width: 100%; border-radius: 28px; box-shadow: 0 20px 60px rgba(61,32,0,0.1); }
+  .trait {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid rgba(92,61,30,0.07);
+    font-weight: 700; color: var(--text-dark); font-size: 0.95rem;
+  }
+  .trait:last-child { border-bottom: none; }
+  .trait-ic {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--beige); display: flex; align-items: center;
+    justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+  }
+  .trait p { font-size: 0.85rem; color: var(--gris); font-weight: 600; margin-top: 3px; }
+
+  /* ===== COMMENT ===== */
+  .comment-bg {
+    background: linear-gradient(135deg, var(--jaune-soft), #FFF8D8); border-radius: 40px; padding: 80px 64px;
+    position: relative; overflow: hidden;
+  }
+  .comment-bg::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--orange) 0%, transparent 65%);
+    opacity: 0.1; border-radius: 50%;
+  }
+  .comment-inner { position: relative; z-index: 2; }
+  .comment-bg .eyebrow { color: var(--orange); }
+  .comment-bg .titre { color: var(--text-dark); }
+  .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-top: 52px;
+  }
+  .step {
+    background: rgba(255,255,255,0.05); border-radius: 24px;
+    padding: 32px 28px; border: 1px solid rgba(255,255,255,0.07);
+    transition: background 0.3s;
+  }
+  .step:hover { background: rgba(255,255,255,0.09); }
+  .step-n {
+    font-family: var(--font-title); font-size: 2.8rem;
+    color: var(--beige); line-height: 1; margin-bottom: 14px; opacity: 1;
+  }
+  .step h3 { font-weight: 900; font-size: 1rem; color: var(--beige); margin-bottom: 10px; }
+  .step p { font-size: 0.88rem; color: var(--text-body); line-height: 1.7; font-weight: 600; }
+  .step-tag {
+    display: inline-block; margin-top: 14px;
+    background: rgba(255,117,31,0.18); color: var(--orange);
+    font-size: 0.72rem; font-weight: 900; padding: 4px 12px;
+    border-radius: 50px; letter-spacing: 0.5px;
+  }
+  .comment-pont {
+    margin-top: 44px; padding: 26px 30px;
+    background: rgba(255,117,31,0.1); border-radius: 18px;
+    border: 1px solid rgba(255,117,31,0.18); text-align: center;
+  }
+  .comment-pont p {
+    font-size: 1.02rem; font-weight: 700;
+    color: var(--text-dark); line-height: 1.7;
+  }
+  .comment-pont strong { color: var(--orange); }
+
+  /* ===== POUR QUI ===== */
+  .pourqui-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 14px; margin-top: 46px;
+  }
+  .pourqui-item {
+    background: var(--beige-soft); border: 1px solid rgba(124,70,28,0.10); border-radius: 18px; padding: 20px 22px;
+    display: flex; align-items: flex-start; gap: 13px;
+    transition: transform 0.2s;
+  }
+  .pourqui-item:hover { transform: translateX(5px); }
+  .pourqui-item span:first-child { font-size: 1.35rem; flex-shrink: 0; }
+  .pourqui-item p { font-weight: 700; color: var(--text-dark); font-size: 0.93rem; line-height: 1.6; }
+  .pourqui-inclusif {
+    margin-top: 28px; text-align: center;
+    background: var(--jaune-soft); border-radius: 18px; padding: 26px 32px;
+  }
+  .pourqui-inclusif p {
+    font-weight: 800; font-size: 1rem; color: var(--text-dark); line-height: 1.8;
+  }
+  .pourqui-inclusif strong { color: var(--orange); }
+
+  /* ===== TÉMOIGNAGES ===== */
+  .temos {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 22px; margin-top: 52px;
+  }
+  .temo {
+    background: var(--beige-soft); border: 1px solid rgba(124,70,28,0.10); border-radius: 22px; padding: 28px 24px;
+    position: relative; transition: transform 0.2s;
+  }
+  .temo:hover { transform: translateY(-4px); }
+  .temo-q {
+    font-size: 3.2rem; color: var(--jaune-soft);
+    font-family: var(--font-title);
+    line-height: 0.8; margin-bottom: 14px; opacity: 0.45;
+  }
+  .temo p {
+    font-size: 0.97rem; font-weight: 700; color: var(--text-dark);
+    line-height: 1.7; font-style: italic; margin-bottom: 20px;
+  }
+  .temo-author { display: flex; align-items: center; gap: 11px; }
+  .temo-av {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--jaune-soft); display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .temo-name { font-weight: 900; font-size: 0.88rem; color: var(--text-dark); }
+  .temo-reve { font-size: 0.76rem; color: var(--gris); font-weight: 600; }
+
+  /* ===== TARIFS ===== */
+  .tarifs-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 22px; margin-top: 52px; max-width: 740px; margin-left: auto; margin-right: auto;
+  }
+  .tarif {
+    background: white; border-radius: 26px; padding: 34px 28px;
+    box-shadow: 0 4px 22px rgba(61,32,0,0.06);
+    transition: transform 0.25s; position: relative;
+  }
+  .tarif:hover { transform: translateY(-5px); }
+  .tarif.star { background: var(--orange); box-shadow: 0 12px 44px rgba(255,117,31,0.32); }
+  .tarif-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--jaune); color: var(--text-dark);
+    font-size: 0.73rem; font-weight: 900; padding: 5px 18px;
+    border-radius: 50px; white-space: nowrap;
+  }
+  .tarif-phase { font-size: 0.73rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--gris); margin-bottom: 7px; }
+  .tarif.star .tarif-phase { color: rgba(255,255,255,0.7); }
+  .tarif-nom { font-family: var(--font-title); font-size: 1.35rem; color: var(--text-dark); margin-bottom: 4px; }
+  .tarif.star .tarif-nom { color: white; }
+  .tarif-essai {
+    display: inline-block; font-size: 0.78rem; font-weight: 800;
+    padding: 4px 12px; border-radius: 50px; margin-bottom: 10px;
+    background: var(--beige); color: var(--orange);
+  }
+  .tarif.star .tarif-essai { background: rgba(255,255,255,0.18); color: var(--jaune); }
+  .tarif-prix { font-family: var(--font-title); font-size: 2.8rem; color: var(--orange); line-height: 1; margin-bottom: 3px; }
+  .tarif.star .tarif-prix { color: var(--jaune); }
+  .tarif-period { font-size: 0.84rem; color: var(--gris); font-weight: 700; margin-bottom: 13px; }
+  .tarif.star .tarif-period { color: rgba(255,255,255,0.7); }
+  .tarif-desc { font-size: 0.86rem; color: var(--gris); line-height: 1.6; font-weight: 600; margin-bottom: 18px; }
+  .tarif.star .tarif-desc { color: rgba(255,255,255,0.8); }
+  .tarif-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .tarif-list li { display: flex; align-items: center; gap: 9px; font-size: 0.86rem; font-weight: 700; color: var(--text-dark); }
+  .tarif.star .tarif-list li { color: white; }
+  .tarif-list li::before {
+    content: '✓'; width: 19px; height: 19px; border-radius: 50%;
+    background: var(--beige); display: flex; align-items: center;
+    justify-content: center; font-size: 0.68rem; color: var(--orange);
+    font-weight: 900; flex-shrink: 0;
+  }
+  .tarif.star .tarif-list li::before { background: rgba(255,255,255,0.22); color: white; }
+  .tarif-note {
+    max-width: 740px; margin: 20px auto 0; text-align: center;
+    background: var(--beige-soft); border: 1px solid rgba(124,70,28,0.10); border-radius: 14px; padding: 16px 22px;
+    font-weight: 700; color: var(--text-body); font-size: 0.9rem; line-height: 1.65;
+  }
+  .tarif-note strong { color: var(--orange); }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 740px; margin: 46px auto 0; display: flex; flex-direction: column; gap: 9px; }
+  details { background: white; border-radius: 15px; padding: 19px 23px; cursor: pointer; box-shadow: 0 2px 12px rgba(61,32,0,0.04); }
+  details[open] { border-left: 4px solid var(--orange); }
+  summary { font-weight: 800; font-size: 0.95rem; color: var(--text-dark); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  summary::after { content: '+'; font-size: 1.3rem; color: var(--orange); flex-shrink: 0; transition: transform 0.2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin-top: 11px; color: var(--text-body); font-size: 0.91rem; line-height: 1.75; font-weight: 600; }
+
+  /* ===== FINAL ===== */
+  .final {
+    background: linear-gradient(135deg, var(--orange), #FF9A52); border-radius: 40px; padding: 96px 64px;
+    text-align: center; position: relative; overflow: hidden;
+    margin: 0 32px 80px;
+  }
+  .final::before {
+    content: ''; position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--orange) 0%, transparent 65%);
+    opacity: 0.08; border-radius: 50%;
+  }
+  .final-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
+  .final img { width: 100%; max-width: 520px; border-radius: 22px; box-shadow: 0 20px 60px rgba(0,0,0,0.28); margin-bottom: 44px; }
+  .final-poeme {
+    font-size: 1.1rem; color: rgba(255,255,255,0.76); line-height: 2.1;
+    font-weight: 600; margin-bottom: 36px;
+  }
+  .final-poeme strong { color: white; font-weight: 900; }
+  .final h2 {
+    font-family: var(--font-title); font-size: clamp(1.9rem, 4vw, 2.8rem);
+    color: var(--beige); margin-bottom: 10px;
+  }
+  .final h2 span { color: var(--orange); }
+  .final-sub { font-size: 0.97rem; color: rgba(255,255,255,0.55); font-weight: 600; margin-bottom: 36px; line-height: 1.65; }
+
+  /* ===== MODALES ===== */
+  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9998; overflow-y: auto; padding: 40px 20px; }
+  .modal-inner { max-width: 660px; margin: 0 auto; background: white; border-radius: 26px; padding: 42px; position: relative; }
+  .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gris); }
+  .modal h2 { font-family: var(--font-title); color: var(--orange); margin-bottom: 20px; font-size: 1.7rem; }
+  .modal h3 { font-weight: 900; color: var(--text-dark); margin: 16px 0 5px; font-size: 0.92rem; }
+  .modal p { color: var(--text-body); line-height: 1.75; font-size: 0.9rem; font-weight: 600; }
+  .modal a { color: var(--orange); }
+
+  /* ===== COOKIES ===== */
+  #cookie-banner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9997;
+    background: white; border-top: 1px solid rgba(246,182,188,0.5);
+    padding: 14px 28px; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    box-shadow: 0 -4px 20px rgba(61,32,0,0.06);
+  }
+  #cookie-banner p { font-size: 0.86rem; color: var(--text-body); font-weight: 600; line-height: 1.6; flex: 1; min-width: 240px; }
+  .cookie-btns { display: flex; gap: 9px; }
+  .btn-accept { background: var(--orange); color: white; border: none; padding: 9px 20px; border-radius: 50px; font-weight: 900; font-size: 0.84rem; cursor: pointer; }
+  .btn-reject { background: white; color: var(--gris); border: 2px solid #ddd; padding: 9px 20px; border-radius: 50px; font-weight: 800; font-size: 0.84rem; cursor: pointer; }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--orange); color: rgba(255,255,255,0.45); text-align: center; padding: 38px 32px; font-size: 0.82rem; font-weight: 600; }
+  footer .flogo { font-family: var(--font-title); font-size: 1.25rem; color: var(--jaune); margin-bottom: 12px; display: block; }
+  footer a { color: rgba(255,255,255,0.45); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  footer a:hover { color: var(--jaune-soft); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+
+
+  /* ===== PONT NARRATIF / PREUVE ===== */
+  .bridge-card {
+    max-width: 900px; margin: 0 auto; background: var(--orange); color: white;
+    border-radius: 28px; padding: 42px 38px; text-align: center;
+    box-shadow: 0 12px 44px rgba(255,117,31,0.25);
+  }
+  .bridge-card h2 { font-family: var(--font-title); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 16px; color: white; }
+  .bridge-card p { font-size: 1.03rem; line-height: 1.8; font-weight: 750; color: rgba(255,255,255,0.9); max-width: 720px; margin: 0 auto; }
+  .credibility-card {
+    max-width: 840px; margin: 46px auto 0; background: white; border-radius: 24px;
+    padding: 30px 28px; box-shadow: 0 4px 24px rgba(115,115,115,0.06);
+    border: 2px solid rgba(246,182,188,0.45);
+  }
+  .credibility-card h3 { font-family: var(--font-title); color: var(--orange); font-size: 1.25rem; margin-bottom: 12px; }
+  .credibility-card p { color: var(--gris); font-weight: 700; line-height: 1.75; font-size: 0.95rem; }
+  .choice-cta { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:28px; }
+
+
+  /* ===== IDENTITÉ VISUELLE 2026 ===== */
+  body, p, a, li, button, summary, details { font-family: var(--font-body); }
+  h1, h2, h3, .titre, .nav-logo, .tarif-nom, .tarif-prix, .modal h2, .bridge-card h2, .final h2 {
+    font-family: var(--font-title);
+    letter-spacing: -0.025em;
+  }
+  .hero-sig, .preview-kicker, .eyebrow, .step-tag, .tarif-phase {
+    font-family: var(--font-accent);
+    letter-spacing: 0.03em;
+  }
+  .hero-sig { font-size: 1.35rem; line-height: 1.25; }
+  .eyebrow { font-size: 0.92rem; text-transform: none; letter-spacing: 0.04em; color: var(--marron); }
+  .nav-logo { font-weight: 900; letter-spacing: -0.04em; }
+  .titre, .hero h1 { font-weight: 900; }
+  .corps, .hero-lettre, .preview-copy p, .pb-item p, .trait p, details p { color: var(--text-body); }
+  .btn-primary, .nav-cta { background: var(--orange); color: var(--blanc); }
+  .btn-primary:hover, .nav-cta:hover { background: var(--marron) !important; }
+  .btn-ghost { color: var(--marron); border-color: rgba(124,70,28,0.28); }
+  .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+  .hero-annee { background: var(--jaune-soft); color: var(--marron-dark); }
+  .hero-proof { border-color: rgba(255,117,31,0.22); color: var(--marron); background: var(--blanc); }
+  .proof-banner, .bridge-card, .tarif.star, footer { background: var(--orange); }
+  .step-n, .step h3 { color: var(--marron); }
+  .step { background: rgba(255,255,255,0.42); border-color: rgba(124,70,28,0.10); }
+  .step p { color: var(--text-body); }
+  .comment-pont { background: rgba(255,255,255,0.62); border-color: rgba(124,70,28,0.12); }
+  .final h2, .final-sub, .final-poeme { color: var(--blanc); }
+  .final h2 span { color: var(--jaune); }
+  .preview-phone.empty-media { width: 100%; max-width: 360px; margin: 0 auto; }
+  .empty-media {
+    min-height: 320px; border: 2px dashed rgba(124,70,28,0.18); border-radius: 28px;
+    background: rgba(255,255,255,0.34);
+  }
+
+  /* ===== IDENTITÉ VISUELLE & IMAGES ===== */
+  .nav-logo { display:flex; align-items:center; }
+  .nav-logo img { width:148px; height:auto; display:block; }
+  .hero-visual { padding:10px; border-radius:34px; background:linear-gradient(145deg, rgba(255,117,31,.18), rgba(255,224,0,.18)); }
+  .hero-visual img { aspect-ratio: 3 / 4; object-fit:cover; object-position:center 42%; border:6px solid rgba(255,255,255,.78); }
+  .pb-img { position:relative; }
+  .pb-img::before { content:''; position:absolute; inset:-14px 14px 14px -14px; border-radius:28px; background:linear-gradient(145deg, rgba(255,224,0,.42), rgba(255,117,31,.22)); z-index:0; }
+  .pb-img img { position:relative; z-index:1; aspect-ratio: 3 / 4; object-fit:cover; object-position:center; }
+  .pepette-img { position:relative; padding:12px; border-radius:34px; background:rgba(255,255,255,.62); box-shadow:0 18px 50px rgba(124,70,28,.12); }
+  .pepette-img img { aspect-ratio: 4 / 5; object-fit:cover; object-position:center 38%; box-shadow:none; }
+  .flogo img { width:180px; height:auto; display:block; margin:0 auto; filter:brightness(0) invert(1); }
+  .app-preview .preview-phone:empty { min-height:460px; border:2px dashed rgba(124,70,28,.18); border-radius:28px; background:rgba(255,255,255,.42); }
+  .app-preview .preview-phone:empty::after { content:'Aperçu de l’application conservé pour intégration'; display:grid; place-items:center; height:100%; padding:24px; text-align:center; color:rgba(124,70,28,.48); font-weight:700; font-size:.9rem; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+    .hero-visual { order: -1; max-width:560px; margin:0 auto; }
+    .nav-logo img { width:126px; }
+    .hero-note-1, .hero-note-2 { display: none; }
+    .pb-grid, .pepette-grid, .steps, .temos, .tarifs-cards, .preview-item, .diff-table { grid-template-columns: 1fr; }
+    .preview-item:nth-child(even) .preview-copy { order: 1; }
+    .preview-item:nth-child(even) .preview-phone { order: 2; }
+    .preview-item { padding: 28px 20px; gap: 28px; }
+    .comment-bg, .final { padding: 52px 26px; border-radius: 24px; margin: 0 0 60px; }
+    .section { padding: 62px 20px; }
+    nav { padding: 12px 18px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" aria-label="T'as vu le prix ?"><img src="assets/logo-tasvu-leprix.png" alt="T'as vu le prix ?"></a>
+  <ul class="nav-links">
+    <li><a href="#pepette">Pépette</a></li>
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#tarifs">Tarifs</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://tally.so/r/PdPVPQ" target="_blank" class="nav-cta">🚀 Je rejoins la liste d'attente</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section style="padding-top:80px; max-width:1280px; margin:0 auto;">
+  <div class="hero">
+    <div class="hero-text">
+      <span class="hero-annee">🚀 Pré-lancement · 100 places à 9,99€/mois à vie</span>
+      <h1>L'application de budget qui t'aide à <span class="hl">financer les rêves</span> qui comptent pour toi.</h1>
+      <p class="hero-clarity">T'as vu le prix ? t'aide à transformer tes rêves en projets réalisables grâce à une gestion simple, visuelle et motivante de ton argent.</p>
+      <div class="hero-proof">🎁 14 jours d'essai gratuit · ouverture des 100 premières places le 15 août</div>
+      <p class="hero-lettre">
+        Marre de te demander où passe ton argent ? Pépette t'aide à comprendre ton mois, organiser tes dépenses en Petits Bocaux et avancer vers ce que tu veux vraiment construire.
+      </p>
+      <span class="hero-sig">Ton argent n'est pas la destination. Ton rêve, oui. 🧡</span>
+      <div class="hero-actions">
+        <a href="https://tally.so/r/PdPVPQ" target="_blank" class="btn-primary">🚀 Je rejoins la liste d'attente</a>
+        <a href="#app-preview" class="btn-ghost">Voir l'application 👀</a>
+      </div>
+      <p class="hero-reassurance">En rejoignant la liste d'attente, tu peux aussi choisir de recevoir les messages retrouvés de 2016 par SMS.</p>
+    </div>
+    <div class="hero-visual empty-media">
+      
+      <div class="hero-note hero-note-1">🫙 Budget simple et visuel</div>
+      <div class="hero-note hero-note-2">🌟 Objectif : ton rêve</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LE PROBLÈME ===== -->
+<section class="section" style="background:var(--blanc);">
+  <div class="section-inner">
+    <span class="eyebrow">Tu te reconnais ?</span>
+    <h2 class="titre">Tu veux réaliser tes rêves,<br><span>mais ton argent te bloque.</span></h2>
+
+    <div class="pb-grid reveal">
+      <div class="pb-items">
+        <div class="pb-item">
+          <span class="pb-icon">😮‍💨</span>
+          <div>
+            <h3>Ce rêve que tu repousses depuis des années</h3>
+            <p>Toujours "plus tard". Toujours "quand j'aurai les moyens". Sauf que "plus tard" n'arrive jamais seul.</p>
+          </div>
+        </div>
+        <div class="pb-item">
+          <span class="pb-icon">🔴</span>
+          <div>
+            <h3>Le découvert de fin de mois</h3>
+            <p>Ce moment où tu regardes ton solde et tu ne comprends pas comment t'en es arrivé là. Encore.</p>
+          </div>
+        </div>
+        <div class="pb-item">
+          <span class="pb-icon">😓</span>
+          <div>
+            <h3>Le stress des imprévus</h3>
+            <p>Une facture. Une panne. Et tout s'effondre parce qu'il n'y a pas de filet de sécurité.</p>
+          </div>
+        </div>
+        <div class="pb-item">
+          <span class="pb-icon">📚</span>
+          <div>
+            <h3>Personne ne t'a appris</h3>
+            <p>À l'école, on t'a appris les racines carrées. Pas à construire vers un rêve. Ce n'est pas un manque de volonté. C'est un manque d'outil.</p>
+          </div>
+        </div>
+        <div class="pb-note">
+          <strong>Ce n'est pas un manque de volonté.</strong> C'est souvent un manque de visibilité, de méthode et de soutien. C'est exactement pour ça que Pépette existe. 🦝
+        </div>
+      </div>
+      <div class="pb-img empty-media"></div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===== PONT NARRATIF ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="bridge-card reveal">
+      <h2>Voilà exactement ce que Pépette résout.</h2>
+      <p>Elle ne te promet pas de devenir expert(e) en finances. Elle t'aide à remettre de la clarté dans ton argent, à protéger tes priorités et à transformer un rêve flou en plan concret, mois après mois.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMENT PÉPETTE FAIT AUTREMENT ===== -->
+<section class="section" id="comment">
+  <div class="section-inner">
+    <div class="comment-bg reveal">
+      <div class="comment-inner">
+        <span class="eyebrow" style="color:var(--jaune-soft);">🧡 La méthode Pépette</span>
+        <h2 class="titre" style="color:var(--text-dark);">Comment Pépette transforme ton argent<br><span>en plan d'action.</span></h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">01</div>
+            <h3>Tu poses ton rêve</h3>
+            <p>Ce voyage, cette maison, cette sécurité. Tu lui donnes un nom. Une image. Un prix. C'est lui qui guidera tout le reste.</p>
+            <span class="step-tag">🌅 Ton grand pourquoi</span>
+          </div>
+          <div class="step">
+            <div class="step-n">02</div>
+            <h3>Pépette rend ton mois lisible</h3>
+            <p>Pépette t'aide à faire un état des lieux honnête. Revenus, charges, dépenses à venir. Sans jugement. Pour savoir ce qui est vraiment disponible.</p>
+            <span class="step-tag">🫙 Tes bocaux</span>
+          </div>
+          <div class="step">
+            <div class="step-n">03</div>
+            <h3>Tu avances sans culpabilité</h3>
+            <p>Les Petits Bocaux t'aident à garder le cap, même quand le mois est compliqué. Chaque petit pas compte.</p>
+            <span class="step-tag">🎉 La destination</span>
+          </div>
+        </div>
+        <div class="comment-pont">
+          <p>Pépette ne te demande pas d'être parfait(e). Elle t'aide à faire mieux qu'hier, à ton rythme, avec un outil qui reste simple et motivant.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APERÇU DE L'APPLICATION ===== -->
+<section class="section app-preview" id="app-preview">
+  <div class="section-inner">
+    <div class="preview-intro reveal">
+      <span class="eyebrow">📱 Concrètement</span>
+      <h2 class="titre">Concrètement, voilà <span>ce que tu achètes</span></h2>
+      <p class="corps" style="margin:0 auto;">Une application simple pour partir de ton rêve, comprendre ton mois et organiser ton argent sans tableau compliqué.</p>
+    </div>
+
+    <div class="preview-stack">
+      <div class="preview-item reveal">
+        <div class="preview-copy">
+          <div class="preview-kicker">Étape 1</div>
+          <h3>🌟 Choisis ton rêve</h3>
+          <p>Voyage, voiture, maison, mariage, projet personnel... Tout commence par ce qui compte vraiment pour toi. Pépette t'aide à lui donner un nom, une image, un montant et un délai pour savoir exactement vers quoi tu avances.</p>
+        </div>
+        <div class="preview-phone empty-media"></div>
+      </div>
+
+      <div class="preview-item reveal d1">
+        <div class="preview-copy">
+          <div class="preview-kicker">Étape 2</div>
+          <h3>💸 Comprends ton mois</h3>
+          <p>Visualise clairement ce qui entre, ce qui sort et ce qu'il te reste pour arrêter d'avancer à l'aveugle et prendre de meilleures décisions.</p>
+        </div>
+        <div class="preview-phone empty-media"></div>
+      </div>
+
+      <div class="preview-item reveal d2">
+        <div class="preview-copy">
+          <div class="preview-kicker">Étape 3</div>
+          <h3>🫙 Organise ton argent simplement</h3>
+          <p>Répartis ton budget dans tes Petits Bocaux pour ne plus te demander où est passé ton argent et protéger ce qui compte vraiment.</p>
+        </div>
+        <div class="preview-phone empty-media"></div>
+      </div>
+    </div>
+
+    <div class="proof-banner reveal">
+      <p>🚀 <strong>Liste d'attente ouverte :</strong> les 100 premières personnes pourront bénéficier du tarif fondateur à <strong>9,99€/mois à vie</strong> lors du pré-lancement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIFFÉRENCE ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:700px; margin:0 auto;" class="reveal">
+      <span class="eyebrow">✨ Pourquoi c'est différent ?</span>
+      <h2 class="titre">Les autres apps parlent budget.<br><span>Pépette parle rêves.</span></h2>
+      <p class="corps" style="margin:0 auto;">T'as vu le prix ? ne te demande pas seulement de suivre tes dépenses. L'application t'aide à relier ton argent à ce que tu veux vraiment construire.</p>
+    </div>
+    <div class="diff-table reveal d1">
+      <div class="diff-col">
+        <h3>Les apps classiques</h3>
+        <ul>
+          <li>Suivre les dépenses</li>
+          <li>Classer des catégories</li>
+          <li>Montrer des chiffres</li>
+          <li>Te laisser seul(e) face à tes chiffres</li>
+        </ul>
+      </div>
+      <div class="diff-col">
+        <h3>T'as vu le prix ?</h3>
+        <ul>
+          <li>Partir de ton rêve pour donner du sens à tes efforts</li>
+          <li>Organiser ton argent en Petits Bocaux pour éviter les dérapages</li>
+          <li>Visualiser ton avancée pour rester motivé(e)</li>
+          <li>Recevoir un soutien bienveillant sans culpabilisation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== PREUVE / TRANSPARENCE ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:700px; margin:0 auto;" class="reveal">
+      <span class="eyebrow">🚀 Pré-lancement</span>
+      <h2 class="titre">Une application en construction,<br><span>avec une promesse claire.</span></h2>
+      <p class="corps" style="margin:0 auto;">T'as vu le prix ? est en cours de préparation pour son ouverture du 15 août. Les premiers retours réels seront ajoutés ici dès les premiers tests.</p>
+    </div>
+    <div class="credibility-card reveal d1">
+      <h3>Ce que les 100 premières personnes pourront tester</h3>
+      <p>Créer un rêve avec montant, image et délai · comprendre son mois simplement · organiser son argent avec les Petits Bocaux · recevoir des rappels bienveillants · suivre son avancée mois après mois.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RENCONTRE PÉPETTE ===== -->
+<section class="section" id="pepette">
+  <div class="section-inner">
+    <span class="eyebrow">🦝 Rencontre Pépette</span>
+    <h2 class="titre">Pas une application.<br><span>Une présence.</span></h2>
+    <p class="corps">Pépette n'est pas une fonctionnalité. C'est un personnage. Elle vit dans son appartement chaleureux, entre ses bocaux et son tableau de rêves. Et elle t'attend.</p>
+
+    <div class="pepette-grid" style="margin-top:52px;">
+      <div class="pepette-img reveal empty-media"></div>
+      <div class="reveal d1">
+        <div class="trait">
+          <div class="trait-ic">💛</div>
+          <div>
+            <strong>Elle croit en toi avant que tu croies en toi</strong>
+            <p>Même quand tu doutes, même quand tu glisses. Pépette ne juge jamais.</p>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-ic">😄</div>
+          <div>
+            <strong>Elle rend les finances légères</strong>
+            <p>Parce que gérer son argent ne devrait pas être une punition.</p>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-ic">🎉</div>
+          <div>
+            <strong>Elle célèbre chaque victoire</strong>
+            <p>50€ épargnés ? Pépette fait la fête. Vraiment. Chaque euro compte.</p>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-ic">🗺️</div>
+          <div>
+            <strong>Elle construit avec toi, pas à ta place</strong>
+            <p>Pépette t'aide à voir ce qui est possible, et à avancer à ton rythme.</p>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-ic">🔒</div>
+          <div>
+            <strong>Elle respecte ton intimité</strong>
+            <p>Tes finances sont personnelles. Tes données restent les tiennes. Toujours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== POUR QUI ===== -->
+<section class="section" style="background:var(--blanc);">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:600px; margin:0 auto;">
+      <span class="eyebrow">💛 Pour qui ?</span>
+      <h2 class="titre">Est-ce que Pépette<br><span>est faite pour toi ?</span></h2>
+    </div>
+
+    <div class="pourqui-grid reveal">
+      <div class="pourqui-item"><span>😮‍💨</span><p>Tu as un rêve que tu repousses depuis trop longtemps.</p></div>
+      <div class="pourqui-item"><span>🙈</span><p>Tu aimerais arrêter de te demander où passe ton argent chaque fin de mois.</p></div>
+      <div class="pourqui-item"><span>😓</span><p>Tu es fatigué(e) d'ouvrir ton application bancaire avec la boule au ventre.</p></div>
+      <div class="pourqui-item"><span>💸</span><p>Tu veux épargner sans avoir l'impression de te priver.</p></div>
+      <div class="pourqui-item"><span>📅</span><p>Les imprévus te déstabilisent parce qu'il n'y a pas de coussin de sécurité.</p></div>
+      <div class="pourqui-item"><span>🌱</span><p>Tu veux reprendre le contrôle de ta vie financière, sans devenir expert(e) en finances.</p></div>
+    </div>
+
+    <div class="pourqui-inclusif reveal">
+      <p>Que tu sois étudiant(e), parent, salarié(e), entrepreneur(e), retraité(e)<br>
+      ou simplement quelqu'un qui a un rêve…<br>
+      <strong>Pépette est là pour t'accompagner. 🦝</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TARIFS ===== -->
+<section class="section" id="tarifs">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:620px; margin:0 auto;">
+      <span class="eyebrow">💸 L'aventure commence ici</span>
+      <h2 class="titre"><span>Réserve ta place pour le pré-lancement</span></h2>
+      <p class="corps" style="margin:0 auto;">Les 100 premières places ouvriront à 9,99€/mois à vie. Rejoins la liste d'attente pour être prévenu(e) en priorité le jour de l'ouverture.</p>
+    </div>
+
+    <div class="tarifs-cards reveal">
+      <div class="tarif star">
+        <div class="tarif-badge">⭐ 100 places · À partir du 15 août</div>
+        <div class="tarif-phase">Pré-lancement</div>
+        <div class="tarif-nom">Accès fondateur</div>
+        <div class="tarif-essai">🎁 14 jours d'essai gratuit</div>
+        <div class="tarif-prix">9,99€</div>
+        <div class="tarif-period">/ mois · garanti à vie 🎉</div>
+        <p class="tarif-desc">Pour les 100 premières personnes. Ce tarif ne reviendra jamais une fois les places prises.</p>
+        <ul class="tarif-list">
+          <li>Crée tes rêves avec montant, image et délai</li>
+          <li>Organise ton mois avec les Petits Bocaux</li>
+          <li>Reçois des rappels doux pour ne rien oublier</li>
+          <li>Suis ton avancée mois après mois</li>
+          <li>Tarif bloqué à vie</li>
+        </ul>
+      </div>
+      <div class="tarif">
+        <div class="tarif-phase">Lancement officiel · 1er sept 2026</div>
+        <div class="tarif-nom">Abonnement standard</div>
+        <div class="tarif-essai">🎁 14 jours d'essai gratuit</div>
+        <div class="tarif-prix">14,99€</div>
+        <div class="tarif-period">/ mois</div>
+        <p class="tarif-desc">Le tarif plein après les 100 premières places. Toutes les fonctionnalités, pour rejoindre l'aventure à tout moment.</p>
+        <ul class="tarif-list">
+          <li>Crée tes rêves avec montant, image et délai</li>
+          <li>Organise ton mois avec les Petits Bocaux</li>
+          <li>Reçois des rappels doux pour ne rien oublier</li>
+          <li>Suis ton avancée mois après mois</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tarif-note reveal">
+      💡 Pépette t'aide à retrouver de la clarté, à éviter les dépenses oubliées et à avancer vers ton rêve chaque mois. C'est un soutien concret pour ta vraie vie.
+    </div>
+    <div style="text-align:center; margin-top:28px;" class="reveal">
+      <a href="https://tally.so/r/PdPVPQ" target="_blank" class="btn-primary">🚀 Je souhaite rejoindre la liste d'attente</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LES MESSAGES DE 2016 ===== -->
+<section class="section section-2016">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:620px; margin:0 auto;">
+      <span class="eyebrow">📩 L'expérience de pré-lancement</span>
+      <h2 class="titre">Avant de rejoindre Pépette,<br>reçois les <span>messages de 2016.</span></h2>
+      <p class="corps" style="margin:0 auto;">En rejoignant la liste d'attente, tu peux aussi choisir de recevoir 4 SMS inspirés d'une mystérieuse conversation retrouvée de 2016.</p>
+    </div>
+
+    <div class="message-2016 reveal">
+      <div class="message-header">
+        <div class="message-avatar">📱</div>
+        <div>
+          <div class="message-from">Toi · Août 2016</div>
+          <div class="message-date">Message reçu · il y a 10 ans</div>
+        </div>
+      </div>
+      <div class="message-body">
+        "Salut. C'est toi, en 2016. Tu te souviens de ce voyage au Japon dont tu rêvais ? Ce projet de reconversion ? Cette maison que tu voulais acheter ?<br><br>
+        <span>Tu y es arrivé(e) ?</span><br><br>
+        Parce que moi, j'y croyais vraiment. Je veux juste savoir si on y est."
+      </div>
+      <div class="message-footer">
+        <span>📅</span>
+        <span>Du 1er au 4 août 2026 · Expérience SMS exclusive</span>
+      </div>
+    </div>
+
+    <div class="message-mystere reveal">
+      <p>Du <strong>1er au 4 août</strong>, des centaines de personnes recevront <strong>des messages retrouvés de 2016.</strong><br>
+      Leurs rêves. Leurs projets. Leurs mots.<br>
+      <strong style="color:var(--orange);">Coche l'option dans le formulaire si tu veux les recevoir. 🦝</strong></p>
+      <div style="margin-top:28px;">
+        <a href="https://tally.so/r/PdPVPQ" target="_blank" class="btn-primary" style="margin:0 auto;">
+          📨 Je veux recevoir les messages retrouvés de 2016
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL ÉMOTIONNEL ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="final reveal">
+      <div class="final-inner">
+
+<h2>Continue l'aventure avec <span>Pépette.</span></h2>
+<p class="final-sub">Le lancement approche. En attendant, retrouve les coulisses, les conseils et l'avancée du projet sur les réseaux.</p>
+<div class="hero-actions" style="justify-content:center;">
+<a class="btn-primary" target="_blank" href="https://www.instagram.com/tasvuleprix?igsh=MWYzZDBrNXFxcnBmdQ%3D%3D&utm_source=qr">📸 Suivre sur Instagram</a>
+<a class="btn-ghost" target="_blank" href="https://www.tiktok.com/@tasvuleprix?_r=1&_t=ZN-97ICsh7HY2A">🎵 Suivre sur TikTok</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq" style="background:var(--blanc);">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:8px;">
+      <span class="eyebrow">❓ Questions</span>
+      <h2 class="titre">On t'a peut-être <span>devancée</span></h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>C'est quoi les "Messages retrouvés de 2016" ?</summary>
+        <p>Du 1er au 4 août 2026, des personnes inscrites recevront des SMS écrits comme si leur version de 2016 leur envoyait un message. Leurs rêves d'époque. Leurs projets oubliés. Une expérience émotionnelle unique pour renouer avec ce qui compte vraiment. 🦝</p>
+      </details>
+      <details>
+        <summary>Pourquoi partir du rêve et pas du budget ?</summary>
+        <p>Parce que personne ne reste motivé pour un tableau. Mais tout le monde reste motivé pour son rêve. En partant de ce qui compte vraiment pour toi, chaque décision financière prend du sens. C'est ça la différence T'as vu le prix ? 🧡</p>
+      </details>
+      <details>
+        <summary>Est-ce que vous allez vraiment regarder mes finances ?</summary>
+        <p>Oui. Et c'est exactement pour ça que ça marche. On pose ensemble tes revenus, tes charges, tes dépenses. Pas pour te juger. Pour tracer avec toi le chemin le plus clair vers ton rêve. Pépette est bienveillante à chaque étape. 🎀</p>
+      </details>
+      <details>
+        <summary>Je suis nulle en chiffres. C'est pour moi ?</summary>
+        <p>C'est exactement pour toi. Pas de jargon, pas de formules. Si tu sais additionner et soustraire, tu sais utiliser l'app. ✨</p>
+      </details>
+      <details>
+        <summary>Quand l'application sera-t-elle disponible ?</summary>
+        <p>Le pré-lancement est prévu le 15 août 2026 avec l'ouverture des 100 premières places à 9,99€/mois. Le lancement officiel aura lieu le 1er septembre 2026. En attendant, tu peux rejoindre la liste d'attente et choisir, si tu le souhaites, de recevoir les messages de 2016 en bonus de pré-lancement. 🦝</p>
+      </details>
+      <details>
+        <summary>Puis-je annuler à tout moment ?</summary>
+        <p>Oui, sans engagement de durée. Si tu es abonnée en pré-lancement et que tu annules, tu perds ton tarif à vie. Réfléchis bien ! 😌</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- MODALES LÉGALES -->
+<div id="modal-mentions" class="modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="document.getElementById('modal-mentions').style.display='none'">✕</button>
+    <h2>Mentions légales</h2>
+    <h3>Éditeur</h3>
+    <p>T'as vu le prix ? est un projet entrepreneurial en cours de création.<br>Responsable : Valentine<br>Contact : <a href="mailto:valentine.btboss@gmail.com">valentine.btboss@gmail.com</a></p>
+    <h3>Hébergement</h3>
+    <p>GitHub Pages · GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+    <h3>Propriété intellectuelle</h3>
+    <p>L'ensemble du contenu (textes, images, mascotte Pépette) est la propriété exclusive de T'as vu le prix ? Toute reproduction est interdite.</p>
+  </div>
+</div>
+
+<div id="modal-confidentialite" class="modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="document.getElementById('modal-confidentialite').style.display='none'">✕</button>
+    <h2>Politique de confidentialité</h2>
+    <h3>Données collectées</h3>
+    <p>Via le formulaire d'inscription, nous collectons prénom, numéro de téléphone et email. Ces données sont utilisées uniquement dans le cadre de la campagne et du lancement de T'as vu le prix ?</p>
+    <h3>Cookies</h3>
+    <p>Ce site utilise des cookies techniques nécessaires à son fonctionnement. Aucun cookie publicitaire sans consentement.</p>
+    <h3>Vos droits</h3>
+    <p>Conformément au RGPD, vous pouvez accéder, rectifier ou supprimer vos données. Contact : <a href="mailto:valentine.btboss@gmail.com">valentine.btboss@gmail.com</a></p>
+  </div>
+</div>
+
+<div id="modal-cgv" class="modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="document.getElementById('modal-cgv').style.display='none'">✕</button>
+    <h2>Conditions Générales de Vente</h2>
+    <h3>Essai gratuit</h3>
+    <p>14 jours d'essai gratuit proposés. Les conditions exactes (avec ou sans CB) seront précisées au lancement officiel.</p>
+    <h3>Tarifs</h3>
+    <p>Pré-lancement : 9,99€/mois garanti à vie pour les 100 premières places. Tarif standard : 14,99€/mois.</p>
+    <h3>Résiliation</h3>
+    <p>Annulation possible à tout moment. La résiliation d'un abonnement pré-lancement entraîne la perte du tarif à vie.</p>
+    <h3>Contact</h3>
+    <p><a href="mailto:valentine.btboss@gmail.com">valentine.btboss@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- COOKIES -->
+<div id="cookie-banner">
+  <p>🍪 Ce site utilise des cookies techniques nécessaires à son bon fonctionnement.
+    <a href="#" onclick="document.getElementById('modal-confidentialite').style.display='block'; return false;"> En savoir plus</a>
+  </p>
+  <div class="cookie-btns">
+    <button class="btn-accept" onclick="acceptCookies()">J'accepte</button>
+    <button class="btn-reject" onclick="rejectCookies()">Refuser</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="flogo"><img src="assets/logo-tasvu-leprix.png" alt="T'as vu le prix ?"></span>
+  <p style="margin-bottom:10px;">
+    <a onclick="document.getElementById('modal-mentions').style.display='block'">Mentions légales</a>
+    &nbsp;·&nbsp;
+    <a onclick="document.getElementById('modal-confidentialite').style.display='block'">Politique de confidentialité</a>
+    &nbsp;·&nbsp;
+    <a onclick="document.getElementById('modal-cgv').style.display='block'">CGV</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.instagram.com/tasvuleprix" target="_blank">Instagram</a>
+  </p>
+  <p>© 2026 T'as vu le prix ? · Fait avec 💛 et beaucoup de Pépette</p>
+</footer>
+
+<script>
+  // Reveal au scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Cookies
+  function acceptCookies() { localStorage.setItem('cookies','accepted'); document.getElementById('cookie-banner').style.display='none'; }
+  function rejectCookies() { localStorage.setItem('cookies','rejected'); document.getElementById('cookie-banner').style.display='none'; }
+  if (localStorage.getItem('cookies')) document.getElementById('cookie-banner').style.display='none';
+
+  // Fermer modales
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', function(e) { if (e.target===this) this.style.display='none'; });
+  });
+</script>
+</body>
+</html>
